@@ -1,0 +1,77 @@
+﻿@model IEnumerable<TransactionsItem>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary"> حركات البيع</h2>
+        </div>
+        <div class="col-6 text-end" asp_action="Index" asp-controller="TransactionsItem">
+            <a asp-controller="TransactionsItem" asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-file-plus"></i> &nbsp; اضافة حركة جديد
+            </a>
+        </div>
+        <div class="row">
+            <form class="d-flex">
+                <input name="searchString" class="form-control me-1" type="search" placeholder="Search" aria-label="Search"></input>
+                <button class="btn btn-dark" type="submit">بحث بكود الحركة </button>
+            </form>
+
+        </div>
+
+
+    </div>
+    <table class="table table-hover" id="tree-table">
+        <thead>
+            <tr>
+                <th scope="col"> كود الحركة </th>
+                <th scope="col"> تاريخ الحركة</th>
+                <th scope="col"> كود الصنف</th>
+                <th scope="col"> سعر الصنف</th>
+                <th scope="col"> كمية الصنف</th>
+                <th scope="col"> كود العميل </th>
+                <th scope="col"></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var TransactionsItem in Model)
+            {
+
+                <tr class="table-primary">
+                    <td scope="row" width="20%">
+                        @TransactionsItem.TransactionId
+                    </td>
+                    <td scope="row" width="20%">
+                        @TransactionsItem.Transaction.TransactionDate
+                    </td>
+                    <td scope="row" width="20%">
+                        @TransactionsItem.ItemId
+                    </td>
+                    <td width="50">@TransactionsItem.ItemPrice</td>
+                    <td width="50">@TransactionsItem.ItemQuantity</td>
+                    <td width="50">@TransactionsItem.Transaction.CustomerId</td>
+                    <td>
+
+                        <a asp-controller="TransactionsItem" asp-action="Edit" asp-route-ItemId="@TransactionsItem.ItemId" class="btn btn-success">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+
+
+                        &nbsp;
+                        <a asp-controller="TransactionsItem" asp-action="Delete" asp-route-ItemId="@TransactionsItem.ItemId" class="btn btn-danger">
+                            <i class="bi bi-trash"></i>
+                        </a>
+
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+
+
+    </table>
+</div>
+

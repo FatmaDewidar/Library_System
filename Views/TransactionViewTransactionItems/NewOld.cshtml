@@ -1,0 +1,43 @@
+﻿@using Library_System.ViewModels
+@model List<TransactionViewTransactionItems>
+@{
+    ViewData["Title"] = "New";
+}
+
+<form method="post">
+    <bu class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">اضافة فاتورة بيع جديدة </h2>
+            <hr />
+        </div>
+        <div class="mb-3">
+            <label asp-for="CustomerId">اسم العميل</label>
+            <input asp-for="CustomerId" class="form-control"></input>
+            <span asp-validation-for="CustomerId" class="text-bg-danger"></span>
+
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ItemPrice">سعر الصنف</label>
+            <input asp-for="ItemPrice" class="form-control"></input>
+            <span asp-validation-for="ItemPrice" class="text-bg-danger"></span>
+
+        </div>
+        <div class="mb-3">
+            <label asp-for="ItemQuantity">الكمية </label>
+            <input asp-for="ItemQuantity" class="form-control"></input>
+            <span asp-validation-for="ItemQuantity" class="text-bg-danger"></span>
+
+        </div>
+
+
+        <button type="submit" class="btn btn-primary" style="width:150px">حفظ</button>
+        <a asp-action="Index" asp-controller="transactionWithTransactionItems" class="btn btn-outline-primary" style="width-150px">
+            عودة الي قائمة الفواتير
+        </a>
+        <br></br>
+        <div>
+
+</form>
+
+

@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Stock>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">قائمة المخازن</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Stock" asp-action="New" class="btn btn-primary">
+                <i class="bi bi-file-plus"></i> &nbsp; اضافة مخزن جديد
+            </a>
+          
+        </div>
+        <div class="row">
+            <form class="d-flex">
+                <input name="searchString" class="form-control me-1" type="search" placeholder="Search" aria-label="search"></input>
+                <button class="btn btn-dark" type="submit"> بحث بالاسم</button>
+            </form>
+
+        </div>
+
+    </div>
+    <table class="table table-hover" id="tree-table">
+        <thead>
+            <tr>
+                <th scope="col"> اسم المخزن</th>
+                <th scope="col">الوصف</th>
+                
+                <th scope="col"></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var stock in Model)
+            {
+
+                <tr class="table-primary">
+                    <td scope="row" width="50%">
+                        @stock.StockName
+                    </td>
+                    <td scope="row" width="50%">
+                        @stock.Description
+                    </td>
+                    
+                    <td>
+
+                        <a asp-controller="Stock" asp-action="Edit" asp-route-StockId="@stock.StockId" class="btn btn-success">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+
+
+                        &nbsp;
+                        <a asp-controller="Stock" asp-action="Delete" asp-route-StockId="@stock.StockId" class="btn btn-danger">
+                            <i class="bi bi-trash"></i>
+                        </a>
+
+
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+
+
+    </table>
+</div>

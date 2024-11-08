@@ -1,0 +1,65 @@
+﻿@model Customer
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<form method="post">
+    <bu class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">حذف عميل</h2>
+            <hr />
+        </div>
+        <div class="mb-3">
+            <label asp-for="CustomerName">اسم العميل</label>
+            <input asp-for="CustomerName" class="form-control"></input>
+            <span asp-validation-for="CustomerName" class="text-bg-danger"></span>
+
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Phone">رقم التليفون</label>
+            <input asp-for="Phone" class="form-control"></input>
+            <span asp-validation-for="Phone" class="text-bg-danger"></span>
+
+        </div>
+        <div class="mb-3">
+            <label asp-for="IdNo">رقم البطاقة</label>
+            <input asp-for="IdNo" class="form-control"></input>
+            <span asp-validation-for="IdNo" class="text-bg-danger"></span>
+
+        </div>
+        <div class="mb-3">
+            <label asp-for="Email">البريد الالكتروني</label>
+            <input asp-for="Email" class="form-control"></input>
+            <span asp-validation-for="Email" class="text-bg-danger"></span>
+
+        </div>
+        <div class="mb-3">
+            <label asp-for="Address">العنوان</label>
+            <input asp-for="Address" class="form-control"></input>
+            <span asp-validation-for="Address" class="text-bg-danger"></span>
+
+        </div>
+        <div class="mb-3">
+            <label asp-for="Country">الدولة</label>
+            <input asp-for="Country" class="form-control"></input>
+            <span asp-validation-for="Country" class="text-bg-danger"></span>
+
+        </div>
+        <div class="mb-3">
+            <label asp-for="TaxCard">البطاقة الضريبية</label>
+            <input asp-for="TaxCard" class="form-control"></input>
+            <span asp-validation-for="TaxCard" class="text-bg-danger"></span>
+
+        </div>
+
+
+        <button type="submit" class="btn btn-primary" style="width:150px">حذف</button>
+        <a asp-action="Index" asp-controller="Customer" class="btn btn-outline-primary" style="width-150px">
+            عودة الي قايمة العملاء
+        </a>
+        <div>
+
+</form>
+
+

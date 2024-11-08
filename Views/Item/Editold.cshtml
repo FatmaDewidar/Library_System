@@ -1,0 +1,65 @@
+﻿@model Item
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<form method="post">
+    <bu class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary"> Edit Item</h2>
+            <hr />
+        </div>
+        <div class="mb-3">
+            <label asp-for="ItemName"></label>
+            <input asp-for="ItemName" class="form-control"></input>
+            <span asp-validation-for="ItemName" class="text-bg-danger"></span>
+
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ItemPrice"></label>
+            <input asp-for="ItemPrice" class="form-control"></input>
+            <span asp-validation-for="ItemPrice" class="text-bg-danger"></span>
+
+        </div>
+        <div class="mb-3">
+            <label asp-for="MaxItemQuantity"></label>
+            <input asp-for="MaxItemQuantity" class="form-control"></input>
+            <span asp-validation-for="MaxItemQuantity" class="text-bg-danger"></span>
+
+        </div>
+        <div class="mb-3">
+            <label asp-for="MinItemQuantity"></label>
+            <input asp-for="MinItemQuantity" class="form-control"></input>
+            <span asp-validation-for="MinItemQuantity" class="text-bg-danger"></span>
+
+        </div>
+        <div class="mb-3">
+            <label asp-for="Description"></label>
+            <input asp-for="Description" class="form-control"></input>
+            <span asp-validation-for="Description" class="text-bg-danger"></span>
+
+        </div>
+        <div class="mb-3">
+            <label asp-for="CategoryId"></label>
+            <input asp-for="CategoryId" class="form-control"></input>
+            <span asp-validation-for="CategoryId" class="text-bg-danger"></span>
+
+        </div>
+        <div class="mb-3">
+            <label asp-for="UomId"></label>
+            <input asp-for="UomId" class="form-control"></input>
+            <span asp-validation-for="UomId" class="text-bg-danger"></span>
+
+        </div>
+
+
+        <button type="submit" class="btn btn-primary" style="width:150px">Edit</button>
+        <a asp-action="Index" asp-controller="Item" class="btn btn-outline-primary" style="width-150px">
+            back to Items
+        </a>
+
+
+</form>
+
+

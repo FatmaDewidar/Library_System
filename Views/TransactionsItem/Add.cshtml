@@ -1,0 +1,63 @@
+﻿<script type="text/javascript">
+    $("#btnSave").on("click", function () {
+        // alert('test');
+        //Loop through the Table rows and build a JSON array.
+        var transactionVM = [];
+        var TransactionsItem = {};
+        var transactionsItemVM = [];
+        var BillOperationDetail = {};
+
+        $("#second-table-operation tbody tr").each(function () {
+
+            BillOperationDetail['Operation'] = $(this).find("td").eq(0).html();
+            BillOperationDetail['Time'] = $(this).find("td").eq(1).html();
+            BillOperationDetail['OperationCost'] = $(this).find("td").eq(2).html();
+
+            transactionsItemVM.push(BillOperationDetail);
+            BillOperationDetail = {};
+
+        });
+
+        $("#second-table tbody tr").each(function () {
+           // alert($(this).find('td:eq(3) input').val());
+            //TransactionsItem['InventoryID'] = $(this).find("td").eq(0).html();
+            //TransactionsItem['billDetailsNotes'] = $(this).find("td").eq(2).html();
+            TransactionsItem['ProductId'] = $(this).find("td").eq(0).html();
+            TransactionsItem['BillDetailsPrice'] = $(this).find("td").eq(2).text();
+            TransactionsItem['BillDetailsQtyPrice'] = $(this).find("td").eq(4).text();
+            TransactionsItem['InventoryId'] = $(this).find("td").eq(5).text();
+            TransactionsItem['BillDetailsQuantity'] = $(this).find("td").eq(3).text();
+            TransactionsItem['CustomerId'] = $('#ddlCustomers').val();
+            TransactionsItem['EmployeeId'] = $('#ddlEmployee').val();
+          
+            transactionVM.push(TransactionsItem);
+            TransactionsItem = {};
+
+        });
+        console.log(transactionVM);
+        $.ajax({
+            url: '/Bill/Add',
+            method: 'POST',
+            data: { transactionVM: transactionVM, transactionsItemVM: transactionsItemVM },
+            success: function (r) {
+                if (r.match("^Print")) {
+                    toastr.success("تم الحفظ بنجاح", 'Success',
+                        {
+                            timeOut: 1000,
+                            fadeOut: 1000,
+                            onHidden: function () {
+                                window.location.href = r;
+                            }
+                        }
+                    );
+                }
+                else { toastr.warning(r, 'warning'); }
+            },
+            error: function (error) {
+                toastr.error(JSON.stringify(error), 'Error');
+            }
+        });
+
+    });
+
+</script>

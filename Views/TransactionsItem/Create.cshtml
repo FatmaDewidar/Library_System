@@ -1,0 +1,74 @@
+﻿@using Library_System.ViewModels
+@model TransactionViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>حركة بيع جديدة</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+           @*  <div class="form-group">
+                <label asp-for="TransactionId" class="control-label"></label>
+                <input asp-for="TransactionId" class="form-control" />
+                <span asp-validation-for="TransactionId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TransactionTypeId" class="control-label"></label>
+                <input asp-for="TransactionTypeId" class="form-control" />
+                <span asp-validation-for="TransactionTypeId" class="text-danger"></span>
+            </div>
+           
+            <div class="form-group">
+                <label asp-for="TransactionDate" class="control-label"></label>
+                <input asp-for="TransactionDate" class="form-control" />
+                <span asp-validation-for="TransactionDate" class="text-danger"></span>
+            </div> *@
+             <div class="form-group">
+                <label asp-for="CustomerId" class="control-label"></label>
+                <input asp-for="CustomerId" class="form-control" />
+                <span asp-validation-for="CustomerId" class="text-danger"></span>
+            </div>
+
+
+            <table class="table table-striped table-bordered bulk_action">
+                <th>Item</th>
+                <th> price</th>
+                <th>Qty</th>
+
+
+                @for (int i = 0; i < Model.TransactionItems.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            <input asp-for="@Model.TransactionItems[i].ItemId" class="form-control" />
+
+                        </td>
+                        <td>
+
+                            <input asp-for="@Model.TransactionItems[i].ItemPrice" class="form-control" />
+                        </td>
+                        <td>
+
+                            <input asp-for="@Model.TransactionItems[i].ItemQuantity" class="form-control" />
+                        </td>
+                    </tr>
+                }
+            </table>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
