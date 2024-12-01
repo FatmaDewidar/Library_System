@@ -21,5 +21,5 @@ public partial class Transaction
 
     public virtual TransactionType? TransactionType { get; set; }
 
-    public virtual ICollection<TransactionsItem> TransactionsItems { get; set; } = new List<TransactionsItem>();
+    public virtual ICollection<TransactionsItem>? TransactionsItems { get; set; } 
 }

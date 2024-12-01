@@ -5,13 +5,13 @@
         var transactionVM = [];
         var TransactionsItem = {};
         var transactionsItemVM = [];
-        var BillOperationDetail = {};
+        var TransItemDetail = {};
 
-        $("#second-table-operation tbody tr").each(function () {
+        $("#second-table-transItem tbody tr").each(function () {
 
-            BillOperationDetail['Operation'] = $(this).find("td").eq(0).html();
-            BillOperationDetail['Time'] = $(this).find("td").eq(1).html();
-            BillOperationDetail['OperationCost'] = $(this).find("td").eq(2).html();
+            TransItemDetail['Item'] = $(this).find("td").eq(0).html();
+            TransItemDetail['price'] = $(this).find("td").eq(1).html();
+            TransItemDetail['qty'] = $(this).find("td").eq(2).html();
 
             transactionsItemVM.push(BillOperationDetail);
             BillOperationDetail = {};
@@ -22,13 +22,11 @@
            // alert($(this).find('td:eq(3) input').val());
             //TransactionsItem['InventoryID'] = $(this).find("td").eq(0).html();
             //TransactionsItem['billDetailsNotes'] = $(this).find("td").eq(2).html();
-            TransactionsItem['ProductId'] = $(this).find("td").eq(0).html();
-            TransactionsItem['BillDetailsPrice'] = $(this).find("td").eq(2).text();
-            TransactionsItem['BillDetailsQtyPrice'] = $(this).find("td").eq(4).text();
-            TransactionsItem['InventoryId'] = $(this).find("td").eq(5).text();
-            TransactionsItem['BillDetailsQuantity'] = $(this).find("td").eq(3).text();
+            TransactionsItem['ItemId'] = $(this).find("td").eq(0).html();
+            TransactionsItem['ItemmPrice'] = $(this).find("td").eq(2).text();
+            TransactionsItem['ItemQuantity'] = $(this).find("td").eq(4).text();
             TransactionsItem['CustomerId'] = $('#ddlCustomers').val();
-            TransactionsItem['EmployeeId'] = $('#ddlEmployee').val();
+           
           
             transactionVM.push(TransactionsItem);
             TransactionsItem = {};

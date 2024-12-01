@@ -11,54 +11,65 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
-           @*  <div class="form-group">
-                <label asp-for="TransactionId" class="control-label"></label>
-                <input asp-for="TransactionId" class="form-control" />
-                <span asp-validation-for="TransactionId" class="text-danger"></span>
+             <div class="form-group">
+                <label asp-for="transaction.TransactionId" class="control-label"></label>
+                <input asp-for="transaction.TransactionId" class="form-control" />
+                <span asp-validation-for="transaction.TransactionId" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="TransactionTypeId" class="control-label"></label>
-                <input asp-for="TransactionTypeId" class="form-control" />
-                <span asp-validation-for="TransactionTypeId" class="text-danger"></span>
+            @*  <div class="form-group">
+                <label asp-for="transaction.TransactionTypeId" class="control-label"></label>
+                <input asp-for="transaction.TransactionTypeId" class="form-control" />
+                <span asp-validation-for="transaction.TransactionTypeId" class="text-danger"></span>
             </div>
            
             <div class="form-group">
-                <label asp-for="TransactionDate" class="control-label"></label>
-                <input asp-for="TransactionDate" class="form-control" />
+                <label asp-for="transaction.TransactionDate" class="control-label"></label>
+                <input type="datetime" asp-for="TransactionDate" class="form-control" />
                 <span asp-validation-for="TransactionDate" class="text-danger"></span>
-            </div> *@
+            </div>   *@
              <div class="form-group">
-                <label asp-for="CustomerId" class="control-label"></label>
-                <input asp-for="CustomerId" class="form-control" />
-                <span asp-validation-for="CustomerId" class="text-danger"></span>
+                <label asp-for="transaction.CustomerId" class="control-label"></label>
+                <input asp-for="transaction.CustomerId" class="form-control" />
+                <span asp-validation-for="transaction.CustomerId" class="text-danger"></span>
             </div>
 
 
-            <table class="table table-striped table-bordered bulk_action">
+            <table class="table table-striped table-bordered bulk_action" id="orderItemsTable">
+                <thead>
                 <th>Item</th>
                 <th> price</th>
                 <th>Qty</th>
+                <th></th>
+                </thead>
 
-
-                @for (int i = 0; i < Model.TransactionItems.Count; i++)
-                {
-                    <tr>
-                        <td>
-                            <input asp-for="@Model.TransactionItems[i].ItemId" class="form-control" />
+              @*   @for (int i = 0; i < Model.transactionsItem.Count; i++)
+                { *@
+                    <tbody>
+                    <tr>                     
+                        <td><input name="transactionsItem[0].ItemId" /> </td>
+                        <td><input name="transactionsItem[0].ItemPrice" type="number" /> </td>
+                        <td><input name="transactionsItem[0].ItemQuantity" type="number" /> </td>
+                        <td><button type="button" onclick="removeRow(this)">Remove</button></td>
+                       @*  <td>
+                            <input asp-for="transactionsItem[0].ItemId" class="form-control" />
 
                         </td>
                         <td>
 
-                            <input asp-for="@Model.TransactionItems[i].ItemPrice" class="form-control" />
+                            <input asp-for="transactionsItem[0].ItemPrice" class="form-control" />
                         </td>
                         <td>
 
-                            <input asp-for="@Model.TransactionItems[i].ItemQuantity" class="form-control" />
-                        </td>
+                            <input asp-for="transactionsItem[0].ItemQuantity" class="form-control" />
+                        </td> *@
+                       
                     </tr>
-                }
+                </tbody>
+                @* } *@
             </table>
-            <div class="form-group">
+            <button type="button" onclick="addRow()">Add Item</button>
+            
+ <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
@@ -68,6 +79,28 @@
 
 
 @section Scripts {
+    <script>
+        function addRow() {
+            const table = document.getElementById("orderItemsTable").getElementsByTagName("tbody")[0];
+            let itemIndex = table.rows.length;
+            const newRow = table.insertRow();
+
+            newRow.innerHTML = `
+                                <td><input name="transactionsItem[${itemIndex}].ItemId" /> </td>
+                                <td><input name="transactionsItem[${itemIndex}].ItemPrice" type="number" /> </td>
+                                <td><input name="transactionsItem[${itemIndex}].ItemQuantity" type="number" /> </td>
+                                <td><button type="button" onclick="removeRow(this)">Remove</button></td>
+                        `;
+            table.appendChild(newItem);
+            //itemIndex++;
+        }
+
+        function removeRow(button) {
+            const row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+    </script>
+
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }

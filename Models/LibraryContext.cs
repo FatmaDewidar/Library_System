@@ -19,9 +19,15 @@ public partial class LibraryContext : DbContext
 
     public virtual DbSet<Customer> Customers { get; set; }
 
+    public virtual DbSet<Group> Groups { get; set; }
+
+    public virtual DbSet<GroupPage> GroupPages { get; set; }
+
     public virtual DbSet<Inventory> Inventories { get; set; }
 
     public virtual DbSet<Item> Items { get; set; }
+
+    public virtual DbSet<Page> Pages { get; set; }
 
     public virtual DbSet<Role> Roles { get; set; }
 
@@ -40,6 +46,8 @@ public partial class LibraryContext : DbContext
     public virtual DbSet<UnitOfMeasure> UnitOfMeasures { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
+
+    public virtual DbSet<UserGroup> UserGroups { get; set; }
 
     public virtual DbSet<UserLogin> UserLogins { get; set; }
 
@@ -115,6 +123,30 @@ public partial class LibraryContext : DbContext
             entity.Property(e => e.ZipCode).HasMaxLength(10);
         });
 
+        modelBuilder.Entity<Group>(entity =>
+        {
+            entity.HasNoKey();
+
+            entity.Property(e => e.GroupId).HasColumnName("Group_Id");
+            entity.Property(e => e.GroupName)
+                .HasMaxLength(50)
+                .HasColumnName("Group_Name");
+        });
+
+        modelBuilder.Entity<GroupPage>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("Group_pages");
+
+            entity.Property(e => e.Delete).HasColumnName("delete");
+            entity.Property(e => e.Edit).HasColumnName("edit");
+            entity.Property(e => e.GroupId).HasColumnName("Group_Id");
+            entity.Property(e => e.GroupPageId).HasColumnName("Group_page_id");
+            entity.Property(e => e.PageId).HasColumnName("Page_Id");
+            entity.Property(e => e.Show).HasColumnName("show");
+        });
+
         modelBuilder.Entity<Inventory>(entity =>
         {
             entity.HasKey(e => e.InventoryId).HasName("PK__Inventor__F5FDE6D3DD314ACC");
@@ -168,6 +200,23 @@ public partial class LibraryContext : DbContext
             entity.HasOne(d => d.Uom).WithMany(p => p.Items)
                 .HasForeignKey(d => d.UomId)
                 .HasConstraintName("FK_Items_UOM");
+        });
+
+        modelBuilder.Entity<Page>(entity =>
+        {
+            entity.HasNoKey();
+
+            entity.Property(e => e.PageCode)
+                .HasMaxLength(50)
+                .HasColumnName("Page_code");
+            entity.Property(e => e.PageId).HasColumnName("Page_ID");
+            entity.Property(e => e.PageLink)
+                .HasMaxLength(50)
+                .HasColumnName("Page_Link");
+            entity.Property(e => e.PageName)
+                .HasMaxLength(50)
+                .HasColumnName("Page_Name");
+            entity.Property(e => e.PageSort).HasColumnName("page_sort");
         });
 
         modelBuilder.Entity<Role>(entity =>
@@ -283,7 +332,9 @@ public partial class LibraryContext : DbContext
 
         modelBuilder.Entity<Transaction>(entity =>
         {
-            entity.Property(e => e.TransactionId).HasColumnName("transaction_id");
+            entity.Property(e => e.TransactionId)
+                .ValueGeneratedNever()
+                .HasColumnName("transaction_id");
             entity.Property(e => e.CreatedBy).HasColumnName("created_by");
             entity.Property(e => e.CustomerId).HasColumnName("customer_id");
             entity.Property(e => e.TransactionDate)
@@ -413,6 +464,17 @@ public partial class LibraryContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("Updated_At");
             entity.Property(e => e.Username).HasMaxLength(50);
+        });
+
+        modelBuilder.Entity<UserGroup>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("User_group");
+
+            entity.Property(e => e.GroupId).HasColumnName("Group_Id");
+            entity.Property(e => e.UserGroupId).HasColumnName("User_Group_Id");
+            entity.Property(e => e.UserId).HasColumnName("User_Id");
         });
 
         modelBuilder.Entity<UserLogin>(entity =>

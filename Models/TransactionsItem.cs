@@ -15,5 +15,5 @@ public partial class TransactionsItem
 
     public string? Notes { get; set; }
 
-    public virtual Transaction Transaction { get; set; } = null!;
+    public virtual Transaction? Transaction { get; set; } 
 }
